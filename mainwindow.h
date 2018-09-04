@@ -7,7 +7,7 @@ using namespace std;
 typedef   QString (*LambdaTypeDef)  ( );
 
 
-class UserData : public QObjectUserData {
+class CustomUserData : public QObjectUserData {
 public:
     void setData(QString data) {
         _data = data;
@@ -27,14 +27,12 @@ public:
     LambdaTypeDef GetLambda()
     {
         return _f;
-        //_f();
     }
 
 private:
     QString _data;
 
 };
-
 
 namespace Ui {
 class MainWindow;
@@ -47,6 +45,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+protected:
+    void showEvent(QShowEvent *ev);
 
 private slots:
     void on_pushButton_clicked();
@@ -55,7 +55,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    UserData GetCustomUserData(int index = 0);
+    CustomUserData GetCustomUserData(int index = 0);
 };
 
 #endif // MAINWINDOW_H
